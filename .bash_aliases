@@ -1,0 +1,21 @@
+# Custom aliases performed on $(date) by debianFreshInstall.sh script.
+alias ll='ls -lah'
+alias rm='rm -vi'
+alias cp='cp -vi'
+alias mv='mv -vi'
+alias dmc='dnf makecache'
+alias dup='sudo dnf -y update'
+alias dug='sudo dnf -y upgrade'
+alias din='sudo dnf -y install'
+alias dse='dnf search'
+
+# Docker aliases
+alias dpsa='docker ps -a'
+alias drmi='docker rmi'
+alias drmv='docker rm'
+alias dpur='docker purge'
+alias drun='docker run'
+alias dpul='docker pull'
+alias dpsh='docker push'
+alias dlin='docker login'
+alias dimg='docker image'
