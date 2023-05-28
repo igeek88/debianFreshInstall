@@ -1,0 +1,88 @@
+#!/bin/bash
+
+# apt-get commands to upgrade system
+sudo apt-get-get update
+sudo apt-get-get -y upgrade
+
+# apt-get command to install some software I usually use on Debian WSL Distribution
+sudo apt-get -y install \
+	wget vim curl apt-get-plugin-system-upgrade gpg kernel-devel kernel-headers gcc make dkms \
+	acpid libglvnd-glx libglvnd-opengl libglvnd-devel pkgconfig vdpauinfo libva-vdpau-driver libva-utils xclip pwgen
+
+# Copying .bash_aliases on this repo to user's home directory; Maybe a combination with cat and appending unique values might be better; I did this a while ago so maybe I had my reason to do it like this, can't remember right now.
+if [ -f ~/.bash_aliases ]; then
+	echo "File ~/.bash_aliases already exists!"
+	else
+		cp .bash_aliases ~/.bash_aliases
+fi
+
+# Adding addToBashrc contents to .bashrc file in users' home directory
+if [ -f ~/.bashrc ]; then
+	echo "File ~/.bashrc already exists!"
+	else
+		cat addToBashrc >> ~/.bashrc
+fi
+
+# Sourcing files so their content is readily availabe
+source ~/.bash_aliases ~/etc/.bashrc
+
+# Creating a directory to put some installers inside and switching to it
+mkdir -vp /home/dl/installers
+cd /home/dl/installers
+
+# Download and install kubectl
+
+# Download and installation of GitHub CLI as copied from https://github.com/cli/cli/blob/trunk/docs/install_linux.md 
+# on 20230528 @ ~ 15.30 UTC
+
+type -p curl >/dev/null || (sudo apt-get update && sudo apt-get install curl -y)
+curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg \
+&& sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg \
+&& echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt-get/sources.list.d/github-cli.list > /dev/null \
+&& sudo apt-get update \
+&& sudo apt-get install gh -y
+
+# Download and installation of docker as copied from https://docs.docker.com/engine/install/debian/
+# on 20230528 @ ~ 15.30 UTC
+
+## Uninstall old versions
+### Uninstall all conflicting packages
+for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt-get remove $pkg; done
+
+# Install using the apt repository
+## Set up the repository
+
+### Update the apt package index and install packages to allow apt to use a repository over HTTPS:
+sudo apt-get update
+sudo apt-get install ca-certificates curl gnupg
+
+### Add Docker’s official GPG key
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+
+### Setup repo
+echo \
+"deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \
+"$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+## Install Docker Engine
+### Update apt package index
+sudo apt-get update
+
+### Install Docker Engine, containerd, and Docker Compose (latest)
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+### Verify that the Docker Engine installation is successful by running the hello-world image
+sudo docker run hello-world
+
+# Install minikube stable from Debian repo as copied from https://minikube.sigs.k8s.io/docs/start/
+# on 20230528 @ ~ 15.30 UTC
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube_latest_amd64.deb
+sudo dpkg -i minikube_latest_amd64.deb
+
+
+
+# Removing folder 
+rm -rvi /home/dl
