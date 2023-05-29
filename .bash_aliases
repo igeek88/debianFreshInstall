@@ -18,3 +18,11 @@ alias dpul='docker pull'
 alias dpsh='docker push'
 alias dlin='docker login'
 alias dimg='docker image'
+
+# Kubectl aliases
+alias k='kubectl'
+alias kgp='kubectl get pods'
+alias kdp='kubectl describe pods'
+alias kgd='kubectl get deployment'
+alias kdd='kubectl describe deployment'
+alias kcd='kubectl create deployment'
