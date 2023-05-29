@@ -6,7 +6,7 @@ sudo apt-get-get -y upgrade
 
 # apt-get command to install some software I usually use on Debian WSL Distribution
 sudo apt-get -y install \
-	wget vim curl apt-get-plugin-system-upgrade gpg kernel-devel kernel-headers gcc make dkms \
+	wget vim curl apt-get-plugin-system-upgrade gpg kernel-devel kernel-headers gcc make dkms python3 \
 	acpid libglvnd-glx libglvnd-opengl libglvnd-devel pkgconfig vdpauinfo libva-vdpau-driver libva-utils xclip pwgen
 
 # Copying .bash_aliases on this repo to user's home directory; Maybe a combination with cat and appending unique values might be better; I did this a while ago so maybe I had my reason to do it like this, can't remember right now.
