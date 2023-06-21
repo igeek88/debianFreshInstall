@@ -3,9 +3,9 @@ alias ll='ls -lah'
 alias rm='rm -vi'
 alias cp='cp -vi'
 alias mv='mv -vi'
-alias agin='sudo apt get install'
-alias agud='sudo apt get update'
-alias agug='sudo apt get upgrade -y'
+alias agin='sudo apt-get install'
+alias agud='sudo apt-get update'
+alias agug='sudo apt-get upgrade -y'
 alias asea='apt search'
 
 # Docker aliases
