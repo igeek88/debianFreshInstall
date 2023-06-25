@@ -6,7 +6,7 @@ sudo apt-get-get -y upgrade
 
 # apt-get command to install some software I usually use on Debian WSL Distribution
 sudo apt-get -y install \
-	wget vim curl apt-get-plugin-system-upgrade gpg kernel-devel kernel-headers gcc make dkms python3 \
+	wget vim curl awscli apt-get-plugin-system-upgrade gpg kernel-devel kernel-headers gcc make dkms python3 \
 	acpid libglvnd-glx libglvnd-opengl libglvnd-devel pkgconfig vdpauinfo libva-vdpau-driver libva-utils xclip pwgen
 
 # Copying .bash_aliases on this repo to user's home directory; Maybe a combination with cat and appending unique values might be better; I did this a while ago so maybe I had my reason to do it like this, can't remember right now.
@@ -82,7 +82,21 @@ sudo docker run hello-world
 curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube_latest_amd64.deb
 sudo dpkg -i minikube_latest_amd64.deb
 
+# eksctl for AWS EKS CLI installation as copied from https://github.com/weaveworks/eksctl/blob/main/README.md#installation
+# according to https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html
 
+## for ARM systems, set ARCH to: `arm64`, `armv6` or `armv7`
+ARCH=amd64
+PLATFORM=$(uname -s)_$ARCH
+
+curl -sLO "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$PLATFORM.tar.gz"
+
+## (Optional) Verify checksum
+curl -sL "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_checksums.txt" | grep $PLATFORM | sha256sum --check
+
+tar -xzf eksctl_$PLATFORM.tar.gz -C /tmp && rm eksctl_$PLATFORM.tar.gz
+
+sudo mv /tmp/eksctl /usr/local/bin
 
 # Removing folder 
 rm -rvi /home/dl
