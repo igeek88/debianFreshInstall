@@ -7,7 +7,7 @@ sudo apt-get -y upgrade
 # apt-get command to install some software I usually use
 sudo apt-get -y install \
 	wget vim terminator curl sudo apt-get-plugin-system-upgrade gpg keepass kernel-devel kernel-headers gcc make dkms flatpak \
-	acpid libglvnd-glx libglvnd-opengl libglvnd-devel pkgconfig vdpauinfo libva-vdpau-driver libva-utils xclip gimp pwgen python3
+	acpid libglvnd-glx libglvnd-opengl libglvnd-devel pkgconfig vdpauinfo libva-vdpau-driver libva-utils xclip gimp pwgen python3 jq
 
 # Copying .bash_aliases on this repo to user's home directory; Maybe a combination with cat and appending unique values might be better; I did this a while ago so maybe I had my reason to do it like this, can't remember right now.
 if [ -f ~/.bash_aliases ]; then
