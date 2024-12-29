@@ -27,8 +27,8 @@ mkdir -vp /home/dl/installers
 cd /home/dl/installers
 
 # Download and installation of Google Chrome Browser
-wget -vdc https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
-sudo apt-get -y install ./google-chrome-stable_current_x86_64.rpm
+wget -vdc https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo apt-get -y install google-chrome-stable_current_amd64.deb
 
 # Removing folder 
 rm -rvi /home/dl
